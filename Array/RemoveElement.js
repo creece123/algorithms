@@ -20,3 +20,22 @@ var removeElement = function(nums, val) {
 
     return s;
 };
+
+/**
+ * @param {number[]} nums
+ * @param {number} val
+ * @return {number}
+ */
+var removeElement = function(nums, val) {
+    var cur = 0,
+        next = 0;
+    while (cur < nums.length) {
+        if (nums[cur] !== val) {
+            nums[next++] = nums[cur++];
+        } else {
+            cur++;
+        }
+    }
+
+    return next;
+};

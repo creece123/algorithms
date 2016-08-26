@@ -4,23 +4,22 @@
  */
 var subsetsWithDup = function(nums) {
     var res = [];
-    res.push([]);
-    nums = nums.sort(function(a,b){return a-b});
-    findSub(nums, 0, [], res);
+    nums.sort(function(a, b) {
+        return a - b; });
+    getSubsets(nums, 0, [], res);
     return res;
 };
 
-function findSub(nums, start, tmp, res){
-    for(var i = start; i < nums.length; i++){
-        if(i > start && nums[i] === nums[i-1]){
-            continue;
+function getSubsets(nums, idx, path, res) {
+    var tmp = path.concat();
+    res.push(tmp);
+
+    for (var i = idx; i < nums.length; i++) {
+        tmp.push(nums[i]);
+        getSubsets(nums, i + 1, tmp, res);
+        tmp.pop();
+        while (nums[i] === nums[i + 1] && i < nums.length - 1) {
+            i++;
         }
-        
-        var arr = tmp.concat();
-        arr.push(nums[i]);
-        console.log(arr);
-        res.push(arr);
-        findSub(nums, i + 1, arr, res);
     }
-    
 }
